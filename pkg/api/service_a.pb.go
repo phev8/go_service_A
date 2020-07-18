@@ -30,18 +30,17 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type ServiceAObject struct {
+type DataObjectA struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Condition bool   `protobuf:"varint,3,opt,name=condition,proto3" json:"condition,omitempty"`
+	ExtraInfo    string               `protobuf:"bytes,1,opt,name=extra_info,json=extraInfo,proto3" json:"extra_info,omitempty"`
+	CommonObject *shared.CommonObject `protobuf:"bytes,2,opt,name=common_object,json=commonObject,proto3" json:"common_object,omitempty"`
 }
 
-func (x *ServiceAObject) Reset() {
-	*x = ServiceAObject{}
+func (x *DataObjectA) Reset() {
+	*x = DataObjectA{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_service_a_service_a_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -49,13 +48,13 @@ func (x *ServiceAObject) Reset() {
 	}
 }
 
-func (x *ServiceAObject) String() string {
+func (x *DataObjectA) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ServiceAObject) ProtoMessage() {}
+func (*DataObjectA) ProtoMessage() {}
 
-func (x *ServiceAObject) ProtoReflect() protoreflect.Message {
+func (x *DataObjectA) ProtoReflect() protoreflect.Message {
 	mi := &file_service_a_service_a_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -67,83 +66,21 @@ func (x *ServiceAObject) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServiceAObject.ProtoReflect.Descriptor instead.
-func (*ServiceAObject) Descriptor() ([]byte, []int) {
+// Deprecated: Use DataObjectA.ProtoReflect.Descriptor instead.
+func (*DataObjectA) Descriptor() ([]byte, []int) {
 	return file_service_a_service_a_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ServiceAObject) GetId() int64 {
+func (x *DataObjectA) GetExtraInfo() string {
 	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *ServiceAObject) GetName() string {
-	if x != nil {
-		return x.Name
+		return x.ExtraInfo
 	}
 	return ""
 }
 
-func (x *ServiceAObject) GetCondition() bool {
-	if x != nil {
-		return x.Condition
-	}
-	return false
-}
-
-type CombinedObject struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	CommonObject  *shared.CommonObject `protobuf:"bytes,1,opt,name=commonObject,proto3" json:"commonObject,omitempty"`
-	ServiceObject *ServiceAObject      `protobuf:"bytes,2,opt,name=serviceObject,proto3" json:"serviceObject,omitempty"`
-}
-
-func (x *CombinedObject) Reset() {
-	*x = CombinedObject{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_service_a_service_a_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CombinedObject) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CombinedObject) ProtoMessage() {}
-
-func (x *CombinedObject) ProtoReflect() protoreflect.Message {
-	mi := &file_service_a_service_a_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CombinedObject.ProtoReflect.Descriptor instead.
-func (*CombinedObject) Descriptor() ([]byte, []int) {
-	return file_service_a_service_a_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CombinedObject) GetCommonObject() *shared.CommonObject {
+func (x *DataObjectA) GetCommonObject() *shared.CommonObject {
 	if x != nil {
 		return x.CommonObject
-	}
-	return nil
-}
-
-func (x *CombinedObject) GetServiceObject() *ServiceAObject {
-	if x != nil {
-		return x.ServiceObject
 	}
 	return nil
 }
@@ -154,38 +91,21 @@ var file_service_a_service_a_proto_rawDesc = []byte{
 	0x0a, 0x19, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x2f, 0x73, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x5f, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x09, 0x73, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x1a, 0x0e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x63,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x52, 0x0a, 0x0e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x41, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09,
-	0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52,
-	0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x8b, 0x01, 0x0a, 0x0e, 0x43,
-	0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x65, 0x64, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x38, 0x0a,
-	0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6d,
-	0x6d, 0x6f, 0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x3f, 0x0a, 0x0d, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19,
-	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x41, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x0d, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x32, 0xd7, 0x01, 0x0a, 0x08, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x41, 0x12, 0x3e, 0x0a, 0x0f, 0x67, 0x65, 0x74, 0x43, 0x6f, 0x6d, 0x6d,
-	0x6f, 0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x15, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x1a,
-	0x14, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x4f,
-	0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x44, 0x0a, 0x10, 0x67, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x15, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
-	0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74,
-	0x1a, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x2e, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x41, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x45, 0x0a, 0x11, 0x67,
-	0x65, 0x74, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x65, 0x64, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74,
-	0x12, 0x15, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x1a, 0x19, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x5f, 0x61, 0x2e, 0x43, 0x6f, 0x6d, 0x62, 0x69, 0x6e, 0x65, 0x64, 0x4f, 0x62, 0x6a, 0x65,
-	0x63, 0x74, 0x42, 0x27, 0x5a, 0x25, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x70, 0x68, 0x65, 0x76, 0x38, 0x2f, 0x67, 0x6f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x5f, 0x41, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x67, 0x0a, 0x0b, 0x44, 0x61, 0x74, 0x61, 0x4f, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x41, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x78, 0x74, 0x72, 0x61, 0x5f, 0x69,
+	0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x78, 0x74, 0x72, 0x61,
+	0x49, 0x6e, 0x66, 0x6f, 0x12, 0x39, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x5f, 0x6f,
+	0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x52, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x32,
+	0x49, 0x0a, 0x08, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x12, 0x3d, 0x0a, 0x0c, 0x67,
+	0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x46, 0x72, 0x6f, 0x6d, 0x42, 0x12, 0x15, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65,
+	0x63, 0x74, 0x1a, 0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x2e, 0x44,
+	0x61, 0x74, 0x61, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x41, 0x42, 0x27, 0x5a, 0x25, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x68, 0x65, 0x76, 0x38, 0x2f, 0x67,
+	0x6f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x41, 0x2f, 0x70, 0x6b, 0x67, 0x2f,
+	0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -200,27 +120,21 @@ func file_service_a_service_a_proto_rawDescGZIP() []byte {
 	return file_service_a_service_a_proto_rawDescData
 }
 
-var file_service_a_service_a_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_service_a_service_a_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_service_a_service_a_proto_goTypes = []interface{}{
-	(*ServiceAObject)(nil),       // 0: service_a.ServiceAObject
-	(*CombinedObject)(nil),       // 1: service_a.CombinedObject
-	(*shared.CommonObject)(nil),  // 2: common.CommonObject
-	(*shared.RequestObject)(nil), // 3: common.RequestObject
+	(*DataObjectA)(nil),          // 0: service_a.DataObjectA
+	(*shared.CommonObject)(nil),  // 1: common.CommonObject
+	(*shared.RequestObject)(nil), // 2: common.RequestObject
 }
 var file_service_a_service_a_proto_depIdxs = []int32{
-	2, // 0: service_a.CombinedObject.commonObject:type_name -> common.CommonObject
-	0, // 1: service_a.CombinedObject.serviceObject:type_name -> service_a.ServiceAObject
-	3, // 2: service_a.ServiceA.getCommonObject:input_type -> common.RequestObject
-	3, // 3: service_a.ServiceA.getServiceObject:input_type -> common.RequestObject
-	3, // 4: service_a.ServiceA.getCombinedObject:input_type -> common.RequestObject
-	2, // 5: service_a.ServiceA.getCommonObject:output_type -> common.CommonObject
-	0, // 6: service_a.ServiceA.getServiceObject:output_type -> service_a.ServiceAObject
-	1, // 7: service_a.ServiceA.getCombinedObject:output_type -> service_a.CombinedObject
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 0: service_a.DataObjectA.common_object:type_name -> common.CommonObject
+	2, // 1: service_a.ServiceA.getDataFromB:input_type -> common.RequestObject
+	0, // 2: service_a.ServiceA.getDataFromB:output_type -> service_a.DataObjectA
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_service_a_service_a_proto_init() }
@@ -230,19 +144,7 @@ func file_service_a_service_a_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_service_a_service_a_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ServiceAObject); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_service_a_service_a_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CombinedObject); i {
+			switch v := v.(*DataObjectA); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -260,7 +162,7 @@ func file_service_a_service_a_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_service_a_service_a_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -286,9 +188,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ServiceAClient interface {
-	GetCommonObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*shared.CommonObject, error)
-	GetServiceObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*ServiceAObject, error)
-	GetCombinedObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*CombinedObject, error)
+	GetDataFromB(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*DataObjectA, error)
 }
 
 type serviceAClient struct {
@@ -299,27 +199,9 @@ func NewServiceAClient(cc grpc.ClientConnInterface) ServiceAClient {
 	return &serviceAClient{cc}
 }
 
-func (c *serviceAClient) GetCommonObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*shared.CommonObject, error) {
-	out := new(shared.CommonObject)
-	err := c.cc.Invoke(ctx, "/service_a.ServiceA/getCommonObject", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceAClient) GetServiceObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*ServiceAObject, error) {
-	out := new(ServiceAObject)
-	err := c.cc.Invoke(ctx, "/service_a.ServiceA/getServiceObject", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceAClient) GetCombinedObject(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*CombinedObject, error) {
-	out := new(CombinedObject)
-	err := c.cc.Invoke(ctx, "/service_a.ServiceA/getCombinedObject", in, out, opts...)
+func (c *serviceAClient) GetDataFromB(ctx context.Context, in *shared.RequestObject, opts ...grpc.CallOption) (*DataObjectA, error) {
+	out := new(DataObjectA)
+	err := c.cc.Invoke(ctx, "/service_a.ServiceA/getDataFromB", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -328,79 +210,35 @@ func (c *serviceAClient) GetCombinedObject(ctx context.Context, in *shared.Reque
 
 // ServiceAServer is the server API for ServiceA service.
 type ServiceAServer interface {
-	GetCommonObject(context.Context, *shared.RequestObject) (*shared.CommonObject, error)
-	GetServiceObject(context.Context, *shared.RequestObject) (*ServiceAObject, error)
-	GetCombinedObject(context.Context, *shared.RequestObject) (*CombinedObject, error)
+	GetDataFromB(context.Context, *shared.RequestObject) (*DataObjectA, error)
 }
 
 // UnimplementedServiceAServer can be embedded to have forward compatible implementations.
 type UnimplementedServiceAServer struct {
 }
 
-func (*UnimplementedServiceAServer) GetCommonObject(context.Context, *shared.RequestObject) (*shared.CommonObject, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCommonObject not implemented")
-}
-func (*UnimplementedServiceAServer) GetServiceObject(context.Context, *shared.RequestObject) (*ServiceAObject, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetServiceObject not implemented")
-}
-func (*UnimplementedServiceAServer) GetCombinedObject(context.Context, *shared.RequestObject) (*CombinedObject, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCombinedObject not implemented")
+func (*UnimplementedServiceAServer) GetDataFromB(context.Context, *shared.RequestObject) (*DataObjectA, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDataFromB not implemented")
 }
 
 func RegisterServiceAServer(s *grpc.Server, srv ServiceAServer) {
 	s.RegisterService(&_ServiceA_serviceDesc, srv)
 }
 
-func _ServiceA_GetCommonObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ServiceA_GetDataFromB_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(shared.RequestObject)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceAServer).GetCommonObject(ctx, in)
+		return srv.(ServiceAServer).GetDataFromB(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/service_a.ServiceA/GetCommonObject",
+		FullMethod: "/service_a.ServiceA/GetDataFromB",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceAServer).GetCommonObject(ctx, req.(*shared.RequestObject))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServiceA_GetServiceObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(shared.RequestObject)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceAServer).GetServiceObject(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/service_a.ServiceA/GetServiceObject",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceAServer).GetServiceObject(ctx, req.(*shared.RequestObject))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServiceA_GetCombinedObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(shared.RequestObject)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceAServer).GetCombinedObject(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/service_a.ServiceA/GetCombinedObject",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceAServer).GetCombinedObject(ctx, req.(*shared.RequestObject))
+		return srv.(ServiceAServer).GetDataFromB(ctx, req.(*shared.RequestObject))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -410,16 +248,8 @@ var _ServiceA_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*ServiceAServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "getCommonObject",
-			Handler:    _ServiceA_GetCommonObject_Handler,
-		},
-		{
-			MethodName: "getServiceObject",
-			Handler:    _ServiceA_GetServiceObject_Handler,
-		},
-		{
-			MethodName: "getCombinedObject",
-			Handler:    _ServiceA_GetCombinedObject_Handler,
+			MethodName: "getDataFromB",
+			Handler:    _ServiceA_GetDataFromB_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
