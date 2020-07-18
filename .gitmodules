@@ -1,0 +1,3 @@
+[submodule "api/service_proto"]
+	path = api/service_proto
+	url = https://github.com/KevinBrendel/service_proto.git
